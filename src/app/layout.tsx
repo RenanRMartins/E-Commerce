@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import clsx from "clsx";
 import Navbar from './components/Navbar';
 
 const geistSans = localFont({
@@ -26,12 +27,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-          <Navbar />
-          <main className='bg-slate-700 h-screen p-16'>
-            {children}
-          </main>
-      </body>
+        <body className={clsx('bg-slate-700', `${geistSans.variable} ${geistMono.variable} antialiased`)}>
+            <Navbar />
+            <main className='h-screen p-16'>
+                {children}
+            </main>
+        </body>
     </html>
-  );
+);
 }
