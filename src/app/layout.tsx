@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Navbar from './components/Navbar';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -14,8 +15,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "E-Commerce Games",
-  description: "E-Commerce de Games",
+  title: "Fashion Elegance",
+  description: "Fashion Elegance",
 };
 
 export default function RootLayout({
@@ -25,10 +26,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+          <Navbar />
+          <main className='bg-slate-700 h-screen p-16'>
+            {children}
+          </main>
       </body>
     </html>
   );
