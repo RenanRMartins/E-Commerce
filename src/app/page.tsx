@@ -11,7 +11,6 @@ async function getProducts() {
 
 export default async function Home() {
   const products = await getProducts();
-  console.log(products);
 
   return (
     <div className="max-w-7xl mx-auto pt-8 px-8 xl:px-0:">

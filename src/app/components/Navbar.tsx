@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 
 function Navbar() {
     return (
@@ -7,6 +8,16 @@ function Navbar() {
             <Link href="/" className='uppercase font-bold text-md h-12 flex items-center'>
                 Fashion Elegance
             </Link>
+            <div className='flex items-center gap-8'>
+                <SignedIn>
+                    <UserButton />
+                </SignedIn>
+                <SignedOut>
+                    <button className='uppercase rounded-md border-gray-400 px-3 py-2'>
+                        Fazer Login
+                    </button>
+                </SignedOut>
+            </div>
         </nav>
     );
 }
