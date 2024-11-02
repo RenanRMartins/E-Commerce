@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs';
 
 function Navbar() {
     return (
@@ -13,9 +13,11 @@ function Navbar() {
                     <UserButton />
                 </SignedIn>
                 <SignedOut>
-                    <button className='uppercase rounded-md border-gray-400 px-3 py-2'>
+                    <SignInButton mode='modal'>
+                    <button className='border rounded-md border-gray-400 px-3 py-2'>
                         Fazer Login
                     </button>
+                    </SignInButton>
                 </SignedOut>
             </div>
         </nav>
