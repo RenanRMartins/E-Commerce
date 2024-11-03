@@ -5,6 +5,7 @@ import clsx from "clsx";
 import Navbar from './components/Navbar';
 import { ClerkProvider } from "@clerk/nextjs";
 import { ptBR } from "@clerk/localizations";
+import Hydrate from "./components/Hydrate";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,10 +32,12 @@ export default function RootLayout({
     <ClerkProvider localization={ptBR}>
       <html lang="en">
         <body className={clsx('bg-slate-700', `${geistSans.variable} ${geistMono.variable} antialiased`)}>
+          <Hydrate>
             <Navbar />
             <main className='h-screen p-16'>
                 {children}
             </main>
+          </Hydrate>
         </body>
       </html>
     </ClerkProvider>  
