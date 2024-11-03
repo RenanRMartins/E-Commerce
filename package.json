@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "prima generate && next dev --turbopack",
-    "build": "prima generate && prisma db push && next build",
+    "dev": "prisma generate && next dev --turbopack",
+    "build": "prisma generate && prisma db push && next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -12,11 +12,13 @@
     "@clerk/localizations": "^3.4.1",
     "@clerk/nextjs": "^6.1.0",
     "@prisma/client": "^5.21.1",
+    "@stripe/stripe-js": "^4.9.0",
     "clsx": "^2.1.1",
     "next": "15.0.2",
     "prisma": "^5.21.1",
     "react": "19.0.0-rc-02c0e824-20241028",
     "react-dom": "19.0.0-rc-02c0e824-20241028",
+    "stripe": "^17.3.1",
     "svix": "^1.37.0"
   },
   "devDependencies": {
