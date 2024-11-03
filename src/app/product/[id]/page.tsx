@@ -27,7 +27,7 @@ async function getProducts(id: string) {
     };
 }
 
-export default async function ProductPage({ params: { id } }: ProductPageProps) {
+export default async function ProductPage({params: {id}}: ProductPageProps) {
     const product = await getProducts(id);
     return (
     <div className="flex flex-col md:flex-row items-center max-w-7xl mx-auto gap-8 p-10">
