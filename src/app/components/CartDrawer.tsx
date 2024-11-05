@@ -19,7 +19,6 @@ export default function CartDrawer() {
             Voltar para loja
         </button>
         <div className="border-t border-gray-400 my-4"></div>
-
         {useStore.onCheckout === 'cart' && (
         <>
         {useStore.cart.map((item) => (
@@ -50,7 +49,7 @@ export default function CartDrawer() {
             </div>
         ))}
         </>
-        )};
+        )}
 
         {useStore.cart.length > 0 && useStore.onCheckout === 'cart' && (
              <CheckoutButton totalPrice={totalPrice} />   
