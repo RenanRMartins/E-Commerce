@@ -58,7 +58,6 @@ async function handler(request: Request) {
             first_name,
             last_name,
             email_addresses,
-            primary_email_address_id,
             ...attributes
         } = evt.data;
 

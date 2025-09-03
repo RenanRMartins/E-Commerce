@@ -3,9 +3,9 @@ import localFont from "next/font/local";
 import "./globals.css";
 import clsx from "clsx";
 import Navbar from './components/Navbar';
+import Hydrate from "./components/Hydrate";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ptBR } from "@clerk/localizations";
-import Hydrate from "./components/Hydrate";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,13 +28,33 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const clerkKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+  
+  if (!clerkKey) {
+    return (
+      <html lang="en">
+        <body className={clsx('bg-slate-700', `${geistSans.variable} ${geistMono.variable} antialiased`)}>
+          <div className="p-16">
+            <div className="text-center">
+              <h1 className="text-2xl font-bold text-gray-300 mb-4">E-Commerce</h1>
+              <p className="text-gray-400">Clerk authentication not configured</p>
+            </div>
+            {children}
+          </div>
+        </body>
+      </html>
+    );
+  }
+  
+
+  
   return (
     <ClerkProvider localization={ptBR}>
       <html lang="en">
-        <body className={clsx('bg-slate-700', `${geistSans.variable} ${geistMono.variable} antialiased`)}>
+        <body className={clsx(`${geistSans.variable} ${geistMono.variable} antialiased`)}>
           <Hydrate>
             <Navbar />
-            <main className='h-screen p-16'>
+            <main className='min-h-screen pt-20'>
                 {children}
             </main>
           </Hydrate>

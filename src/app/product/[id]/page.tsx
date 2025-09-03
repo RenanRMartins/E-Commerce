@@ -4,9 +4,9 @@ import { formatPrice } from "@/app/lib/utils";
 import Stripe from "stripe";
 
 type ProductPageProps = {
-    params: {
+    params: Promise<{
         id: string;
-    };
+    }>;
 };
 
 async function getProducts(id: string) {
@@ -19,6 +19,7 @@ async function getProducts(id: string) {
 
     return {
         id: produto.id,
+        unit_amount: price.data[0].unit_amount,
         price: price.data[0].unit_amount,
         name: produto.name,
         image: produto.images[0],
@@ -27,7 +28,8 @@ async function getProducts(id: string) {
     };
 }
 
-export default async function ProductPage({params: {id}}: ProductPageProps) {
+export default async function ProductPage({params}: ProductPageProps) {
+    const {id} = await params;
     const product = await getProducts(id);
     return (
     <div className="flex flex-col md:flex-row items-center max-w-7xl mx-auto gap-8 p-10">

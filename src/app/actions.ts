@@ -1,28 +1,35 @@
 'use server';
-import { ProductType } from "./types/ProductType";
-import { stripe } from "./lib/stripe";
+import { container } from "./core/container/ServiceContainer";
+import { IProductService } from "./core/interfaces/IProductRepository";
+import "./core/container/containerConfig";
 
-export async function fetchProducts( { lastProductId }: { lastProductId?: string | undefined}) {
-    const params = lastProductId ? { starting_after: lastProductId, limit: 12 } : { limit: 12 };
-    
-    const { data: products, has_more } = await stripe.products.list(params);
-    
-    const formatedProducts = await Promise.all(
-      products.map(async (product) => {
-        const price = await stripe.prices.list({
-          product: product.id,
-        });
-        return {
-          id: product.id,
-          price: price.data[0].unit_amount,
-          name: product.name,
-          image: product.images[0],
-          description: product.description,
-          currency: price.data[0].currency,
+export async function fetchProducts({ lastProductId }: { lastProductId?: string | undefined }) {
+    try {
+        if (!container.isRegistered('IProductService')) {
+            // Return empty data if services are not configured
+            return {
+                formatedProducts: [],
+                has_more: false
+            };
         }
-      })
-    );
-  
-    return {formatedProducts, has_more};
-  
-  }
+        
+        const productService = container.get<IProductService>('IProductService');
+        
+        const result = await productService.getProducts({ 
+            lastProductId, 
+            limit: 12 
+        });
+        
+        return {
+            formatedProducts: result.products,
+            has_more: result.hasMore
+        };
+    } catch (error) {
+        console.error('Error fetching products:', error);
+        // Return empty data on error
+        return {
+            formatedProducts: [],
+            has_more: false
+        };
+    }
+}

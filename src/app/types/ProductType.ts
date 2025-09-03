@@ -1,9 +1,9 @@
 export type ProductType = {
-    unit_amount: any;
+    unit_amount: number | null;
     id: string;
     price: number | null;
     name: string;
-    quantity?: number | 1;
+    quantity?: number;
     image: string;
     description: string | null;
     currency?: string;
