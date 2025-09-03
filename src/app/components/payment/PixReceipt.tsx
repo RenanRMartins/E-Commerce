@@ -3,10 +3,11 @@ import { IPaymentResult } from '../../core/interfaces/IPaymentMethod';
 
 type PixReceiptProps = {
   result: IPaymentResult;
+  totalAmount: number;
   onClose: () => void;
 };
 
-export default function PixReceipt({ result, onClose }: PixReceiptProps) {
+export default function PixReceipt({ result, totalAmount, onClose }: PixReceiptProps) {
   const formatDate = (date: Date) => {
     return date.toLocaleString('pt-BR', {
       day: '2-digit',
@@ -43,7 +44,7 @@ export default function PixReceipt({ result, onClose }: PixReceiptProps) {
           {/* Valor Transferido */}
           <div className="bg-green-500/10 rounded-xl p-4 mb-6 text-center">
             <div className="text-3xl font-bold text-green-500 mb-1">
-              {formatAmount(result.amount || 0)}
+              {formatAmount(totalAmount)}
             </div>
             <p className="text-gray-300 text-sm">Transferido com sucesso</p>
           </div>

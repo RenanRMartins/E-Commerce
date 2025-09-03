@@ -270,6 +270,7 @@ export default function CheckoutModal({ isOpen, onClose, totalAmount, items }: C
       {showPixReceipt && paymentResult && (
         <PixReceipt
           result={paymentResult}
+          totalAmount={totalAmount}
           onClose={onClose}
         />
       )}
